@@ -12,30 +12,33 @@ const Name = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: 'easeOut' }}
+                className="min-h-screen flex justify-center items-center"
             >
-                <section className="h-screen flex flex-col justify-center items-center p-4 sm:p-6 lg:p-8">
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold pb-4">AKASH POTTI</h1>
-                    <div className="text-lg sm:text-xl md:text-2xl pb-4">
+                <section className="w-full max-w-4xl flex flex-col justify-center items-center p-4 sm:p-6 lg:p-8">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold pb-4 text-center">
+                        AKASH POTTI
+                    </h1>
+                    <div className="text-base sm:text-lg md:text-xl lg:text-3xl pb-4 text-center">
                         Bangalore | India |{' '}
                         <Clock format={'HH:mm:ss'} ticking={true} timezone={'Asia/Kolkata'} />
                     </div>
-                    <p className="text-base sm:text-lg md:text-xl text-center">
+                    <p className="text-sm font-normal sm:text-base md:text-lg lg:text-2xl text-center max-w-2xl">
                         Hi there👋, I am currently delving into AI/ML, Embedded Systems, Data
                         Analysis. I am also a fullstack developer with experience in
                         React, Next.js, Node, Tailwind CSS, Postgres.
                     </p>
-                    <div className="flex flex-row gap-2 mt-4 items-center">
+                    <div className="flex flex-row gap-4 mt-6 ">
                         <a
-                            className="hover:scale-125 transition duration-300 ease-in-out"
-                            href=""
+                            className="shadow-xl hover:scale-110 transition duration-300 ease-in-out"
+                            href="#"
                         >
-                            <FaSquareGithub size={30} />
+                            <FaSquareGithub size={40} />
                         </a>
                         <a
-                            className="hover:scale-125 transition duration-300 ease-in-out"
-                            href=""
+                            className="shadow-xl hover:scale-110 transition duration-300 ease-in-out"
+                            href="#"
                         >
-                            <RxLinkedinLogo size={30} />
+                            <RxLinkedinLogo size={40} />
                         </a>
                     </div>
                 </section>
