@@ -18,7 +18,7 @@ const Contact = () => {
             <section className="flex flex-col w-full items-center">
                 <h2 className="text-6xl pb-4">CONTACT</h2>
                 <p className="text-sm font-normal sm:text-base md:text-lg lg:text-xl text-center max-w-2xl">
-                    I'm always seeking growth opportunities in computer science and open source. If you think I could contribute to your project or organization,
+                    I&aposm always seeking growth opportunities in computer science and open source. If you think I could contribute to your project or organization,
                     please reach out to me at the email below. I look forward to connecting with you!
                 </p>
                 <div className="flex flex-col items-center mt-4">

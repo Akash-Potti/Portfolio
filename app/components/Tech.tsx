@@ -27,6 +27,12 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
+// Define a type for techs
+interface Tech {
+    Icon: React.ElementType;
+    label: string;
+}
+
 const Technologies = () => {
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0 });
 
@@ -38,7 +44,8 @@ const Technologies = () => {
     });
     const [selectedIndex, setSelectedIndex] = useState(0);
 
-    const techs = [
+    // Define techs with the correct type
+    const techs: Tech[] = [
         { Icon: SiPytorch, label: 'PyTorch' },
         { Icon: SiScikitlearn, label: 'Sci-Kit Learn' },
         { Icon: SiNumpy, label: 'NumPy' },
@@ -68,10 +75,13 @@ const Technologies = () => {
         emblaApi.on('select', onSelect);
     }, [emblaApi, onSelect]);
 
-    const scrollTo = useCallback((index: number) => {
-        if (!emblaApi) return;
-        emblaApi.scrollTo(index);
-    }, [emblaApi]);
+    const scrollTo = useCallback(
+        (index: number) => {
+            if (!emblaApi) return;
+            emblaApi.scrollTo(index);
+        },
+        [emblaApi]
+    );
 
     return (
         <motion.div
@@ -92,47 +102,60 @@ const Technologies = () => {
                             className="flex flex-col bg-[#ebe6e6] items-center justify-center p-4 border rounded-lg shadow-md hover:scale-[1.045] transition duration-300 ease-in-out"
                         >
                             <tech.Icon className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16" />
-                            <p className="mt-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">{tech.label}</p>
+                            <p className="mt-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">
+                                {tech.label}
+                            </p>
                         </div>
                     ))}
                 </div>
                 <div className="md:hidden w-full overflow-hidden relative">
                     <div className="embla" ref={emblaRef}>
                         <div className="embla__container flex">
-                            {techs.reduce((acc, tech, index) => {
-                                if (index % 4 === 0) acc.push([]);
-                                acc[acc.length - 1].push(tech);
-                                return acc;
-                            }, [] as typeof techs[][]).map((techGroup, slideIndex) => (
-                                <div className="embla__slide flex-none w-full" key={slideIndex}>
-                                    <div className="grid grid-cols-2 gap-4 p-4">
-                                        {techGroup.map((tech, index) => (
-                                            <div
-                                                key={index}
-                                                className="flex flex-col bg-[#ebe6e6] items-center justify-center p-4 border rounded-lg shadow-md hover:scale-[1.045] transition duration-300 ease-in-out"
-                                            >
-                                                <tech.Icon className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16" />
-                                                <p className="mt-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">{tech.label}</p>
-                                            </div>
-                                        ))}
+                            {techs
+                                .reduce((acc: Tech[][], tech, index) => {
+                                    if (index % 4 === 0) acc.push([]);
+                                    acc[acc.length - 1].push(tech);
+                                    return acc;
+                                }, [])
+                                .map((techGroup, slideIndex) => (
+                                    <div
+                                        className="embla__slide flex-none w-full"
+                                        key={slideIndex}
+                                    >
+                                        <div className="grid grid-cols-2 gap-4 p-4">
+                                            {techGroup.map((tech, index) => (
+                                                <div
+                                                    key={index}
+                                                    className="flex flex-col bg-[#ebe6e6] items-center justify-center p-4 border rounded-lg shadow-md hover:scale-[1.045] transition duration-300 ease-in-out"
+                                                >
+                                                    <tech.Icon className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16" />
+                                                    <p className="mt-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">
+                                                        {tech.label}
+                                                    </p>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
                         </div>
                     </div>
                     {/* Navigation Dots */}
                     <div className="flex justify-center mt-4">
-                        {techs.reduce((acc, _, index) => {
-                            if (index % 4 === 0) acc.push(index / 4);
-                            return acc;
-                        }, [] as number[]).map((_, slideIndex) => (
-                            <button
-                                key={slideIndex}
-                                className={`w-3 h-3 mx-1 rounded-full ${slideIndex === selectedIndex ? "bg-blue-500" : "bg-gray-300"
-                                    }`}
-                                onClick={() => scrollTo(slideIndex)}
-                            />
-                        ))}
+                        {techs
+                            .reduce((acc: number[], _, index) => {
+                                if (index % 4 === 0) acc.push(index / 4);
+                                return acc;
+                            }, [])
+                            .map((_, slideIndex) => (
+                                <button
+                                    key={slideIndex}
+                                    className={`w-3 h-3 mx-1 rounded-full ${slideIndex === selectedIndex
+                                        ? 'bg-blue-500'
+                                        : 'bg-gray-300'
+                                        }`}
+                                    onClick={() => scrollTo(slideIndex)}
+                                />
+                            ))}
                     </div>
                 </div>
             </section>
