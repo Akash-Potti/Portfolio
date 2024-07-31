@@ -3,8 +3,11 @@
 import Card from "./Card";
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { motion } from "framer-motion";
+import { useInView } from 'react-intersection-observer';
 
 const ProjectSection = () => {
+    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0 });
     const projects = [
         {
             name: "Eyantra GeoGuide",
@@ -61,48 +64,53 @@ const ProjectSection = () => {
     );
 
     return (
-        <div className="flex flex-col w-full justify-center items-center">
-            <h3 className="text-4xl md:text-6xl font-bold mb-4">PROJECTS</h3>
-            <div className="hidden md:grid grid-cols-3 gap-y-10 gap-x-10 pt-10 justify-center">
-                {projects.map((project, index) => (
-                    <Card
-                        key={index}
-                        name={project.name}
-                        description={project.description}
-                        github={project.github}
-                    />
-                ))}
-            </div>
-            <div className="md:hidden w-full overflow-hidden relative p-8 ">
-                <div className="embla" ref={emblaRef}>
-                    <div className="embla__container flex">
-                        {projects.map((project, index) => (
-                            <div className="embla__slide flex-none w-full" key={index}>
-                                <div className="flex justify-center">
-                                    <Card
-                                        name={project.name}
-                                        description={project.description}
-                                        github={project.github}
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                {/* Navigation Dots */}
-                <div className="flex justify-center mt-4">
-                    {projects.map((_, index) => (
-                        <button
+        <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 50 }}
+            transition={{ duration: 1, ease: 'easeOut' }}>
+            <div className="flex flex-col w-full justify-center items-center">
+                <h3 className="text-4xl md:text-6xl font-bold mb-4">PROJECTS</h3>
+                <div className="hidden md:grid grid-cols-3 gap-y-10 gap-x-10 pt-10 justify-center">
+                    {projects.map((project, index) => (
+                        <Card
                             key={index}
-                            className={`w-3 h-3 mx-1 rounded-full ${index === selectedIndex ? "bg-black" : "bg-gray-300"
-                                }`}
-                            onClick={() => scrollTo(index)}
+                            name={project.name}
+                            description={project.description}
+                            github={project.github}
                         />
                     ))}
                 </div>
-            </div>
-            {/* Inline Styles for Embla Carousel */}
-            <style jsx>{`
+                <div className="md:hidden w-full overflow-hidden relative p-8 ">
+                    <div className="embla" ref={emblaRef}>
+                        <div className="embla__container flex">
+                            {projects.map((project, index) => (
+                                <div className="embla__slide flex-none w-full" key={index}>
+                                    <div className="flex justify-center">
+                                        <Card
+                                            name={project.name}
+                                            description={project.description}
+                                            github={project.github}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    {/* Navigation Dots */}
+                    <div className="flex justify-center mt-4">
+                        {projects.map((_, index) => (
+                            <button
+                                key={index}
+                                className={`w-3 h-3 mx-1 rounded-full ${index === selectedIndex ? "bg-black" : "bg-gray-300"
+                                    }`}
+                                onClick={() => scrollTo(index)}
+                            />
+                        ))}
+                    </div>
+                </div>
+                {/* Inline Styles for Embla Carousel */}
+                <style jsx>{`
                 .embla {
                     overflow: hidden;
                 }
@@ -117,7 +125,8 @@ const ProjectSection = () => {
                     box-sizing: border-box;
                 }
             `}</style>
-        </div>
+            </div>
+        </motion.div>
     );
 };
 
