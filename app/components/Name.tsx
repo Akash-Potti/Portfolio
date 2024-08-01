@@ -15,7 +15,7 @@ const Name = () => {
                 className="min-h-screen flex justify-center items-center overflow-hidden"
             >
                 <div className="w-full max-w-4xl flex flex-col justify-center items-center p-4 sm:p-6 lg:p-8">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold pb-4 text-center">
+                    <h1 className="text-4xl md:text-5xl font-bold pb-8 text-center">
                         AKASH POTTI
                     </h1>
                     <div className="text-base sm:text-lg md:text-xl lg:text-3xl pb-4 text-center">
