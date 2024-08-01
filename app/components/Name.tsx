@@ -12,9 +12,9 @@ const Name = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: 'easeOut' }}
-                className="min-h-screen flex justify-center items-center"
+                className="min-h-screen flex justify-center items-center overflow-hidden"
             >
-                <section className="w-full max-w-4xl flex flex-col justify-center items-center p-4 sm:p-6 lg:p-8">
+                <div className="w-full max-w-4xl flex flex-col justify-center items-center p-4 sm:p-6 lg:p-8">
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold pb-4 text-center">
                         AKASH POTTI
                     </h1>
@@ -41,9 +41,9 @@ const Name = () => {
                             <RxLinkedinLogo size={40} />
                         </a>
                     </div>
-                </section>
+                </div>
             </motion.div>
-        </Parallax>
+        </Parallax >
     );
 };
 

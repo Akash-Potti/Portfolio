@@ -27,7 +27,6 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-// Define a type for techs
 interface Tech {
     Icon: React.ElementType;
     label: string;
@@ -44,7 +43,6 @@ const Technologies = () => {
     });
     const [selectedIndex, setSelectedIndex] = useState(0);
 
-    // Define techs with the correct type
     const techs: Tech[] = [
         { Icon: SiPytorch, label: 'PyTorch' },
         { Icon: SiScikitlearn, label: 'Sci-Kit Learn' },
@@ -95,7 +93,7 @@ const Technologies = () => {
                 <h1 className="text-4xl sm:text-4xl md:text-5xl font-bold pb-8 text-center">
                     TECHNOLOGIES
                 </h1>
-                <div className="hidden md:grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-8">
+                <div className="hidden md:grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 mt-8">
                     {techs.map((tech, index) => (
                         <div
                             key={index}
@@ -159,7 +157,6 @@ const Technologies = () => {
                     </div>
                 </div>
             </section>
-            {/* Inline Styles for Embla Carousel */}
             <style jsx>{`
                 .embla {
                     overflow: hidden;
@@ -171,17 +168,6 @@ const Technologies = () => {
 
                 .embla__slide {
                     box-sizing: border-box;
-                }
-
-                .embla__prev,
-                .embla__next {
-                    width: 2.5rem;
-                    height: 2.5rem;
-                    font-size: 1.5rem;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border: 1px solid #ddd;
                 }
             `}</style>
         </motion.div>

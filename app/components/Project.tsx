@@ -4,7 +4,7 @@ import Card from "./Card";
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { motion } from "framer-motion";
-import { useInView } from 'react-intersection-observer';
+import { useInView } from "react-intersection-observer";
 
 const ProjectSection = () => {
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0 });
@@ -68,9 +68,10 @@ const ProjectSection = () => {
             ref={ref}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 50 }}
-            transition={{ duration: 1, ease: 'easeOut' }}>
-            <div className="flex flex-col w-full justify-center items-center">
-                <h3 className="text-4xl md:text-6xl font-bold mb-4">PROJECTS</h3>
+            transition={{ duration: 1, ease: "easeOut" }}
+        >
+            <div className="flex flex-col w-full justify-center items-center overflow-hidden">
+                <h3 className="text-4xl sm:text-4xl md:text-5xl font-bold pb-8 text-center">PROJECTS</h3>
                 <div className="hidden md:grid grid-cols-3 gap-y-10 gap-x-10 pt-10 justify-center">
                     {projects.map((project, index) => (
                         <Card
@@ -81,12 +82,15 @@ const ProjectSection = () => {
                         />
                     ))}
                 </div>
-                <div className="md:hidden w-full overflow-hidden relative p-8 ">
+                <div className="w-full relative overflow-hidden md:hidden">
                     <div className="embla" ref={emblaRef}>
                         <div className="embla__container flex">
                             {projects.map((project, index) => (
-                                <div className="embla__slide flex-none w-full" key={index}>
-                                    <div className="flex justify-center">
+                                <div
+                                    className="embla__slide flex-none w-full"
+                                    key={index}
+                                >
+                                    <div className="flex justify-center px-4">
                                         <Card
                                             name={project.name}
                                             description={project.description}
@@ -111,20 +115,26 @@ const ProjectSection = () => {
                 </div>
                 {/* Inline Styles for Embla Carousel */}
                 <style jsx>{`
-                .embla {
-                    overflow: hidden;
-                }
+          .embla {
+            overflow: hidden;
+            width: 100%;
+            max-width: 100vw; /* Ensure it never exceeds viewport width */
+          }
 
-                .embla__container {
-                    display: flex;
-                }
+          .embla__container {
+            display: flex;
+            width: 100%;
+            transform: translateX(0);
+            
+            margin: 0; /* Reset margin to avoid unwanted shifts */
+          }
 
-                .embla__slide {
-                    position: relative;
-                    min-width: 100%;
-                    box-sizing: border-box;
-                }
-            `}</style>
+          .embla__slide {
+            position: relative;
+            min-width: 100%; /* Ensure each slide takes full width */
+            box-sizing: border-box;
+          }
+        `}</style>
             </div>
         </motion.div>
     );
