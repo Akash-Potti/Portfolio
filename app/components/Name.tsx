@@ -30,13 +30,13 @@ const Name = () => {
                     <div className="flex flex-row gap-4 mt-6 ">
                         <a
                             className="shadow-xl hover:scale-110 transition duration-300 ease-in-out"
-                            href="#"
+                            href="https://github.com/Akash-Potti"
                         >
                             <FaSquareGithub size={40} />
                         </a>
                         <a
                             className="shadow-xl hover:scale-110 transition duration-300 ease-in-out"
-                            href="#"
+                            href="https://www.linkedin.com/in/akash-potti-434997249/"
                         >
                             <RxLinkedinLogo size={40} />
                         </a>
