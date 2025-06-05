@@ -22,8 +22,8 @@ export default function Blog() {
         async function fetchPosts() {
             const snapshot = await getDocs(collection(db, "blogs"));
             const postsData = snapshot.docs.map((doc) => ({
+                ...(doc.data() as Omit<Post, "id">),
                 id: doc.id,
-                ...(doc.data() as Post),
             }));
             setPosts(postsData);
             setLoading(false);
