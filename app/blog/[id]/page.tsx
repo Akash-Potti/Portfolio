@@ -2,6 +2,7 @@ import { db } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import ReactMarkdown from "react-markdown";
 
+export const dynamic = "force-dynamic";
 export default async function Post({ params }: { params: { id: string } }) {
     const docRef = doc(db, "blogs", params.id);
     const docSnap = await getDoc(docRef);
