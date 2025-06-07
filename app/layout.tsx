@@ -2,6 +2,7 @@
 import { Kanit } from 'next/font/google'
 import "./globals.css";
 import { ParallaxProvider } from 'react-scroll-parallax'
+import { Analytics } from '@vercel/analytics/react'
 
 const kanit = Kanit({
   weight: '500',
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={kanit.className}>
         <ParallaxProvider>{children}</ParallaxProvider>
+        <Analytics />
       </body>
     </html>
   );
